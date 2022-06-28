@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue-Boolzapp</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/23673491d4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="root" class="flex-wrapper">
+        <div class="main-container flex-wrapper">
+            <!-- ?ASIDE? -->
+            <aside>
+                <!-- ?aside boolzapp top section? -->
+                <div class="boolzapp-top-portion flex-wrapper">
+                    <!-- ?user profile section? -->
+                    <div class="photo-text-side flex-wrapper">
+                        <div class="content-circle-wrapper">
+                            <img src="../img/avatar_io.jpg" alt="">
+                        </div>
+                        <div class="user-name">
+                            <div>
+                                <div>Francesca</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ?boolzapp top section icons? -->
+                    <ul class="boolzapp-top-portion-icons flex-wrapper">
+                        <li>
+                            <span>
+                                <a href="#">
+                                    <i class="fa-solid fa-circle-notch"></i>
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <a href="#">
+                                    <i class="fa-solid fa-message"></i>
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <a href="#">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- ?aside notifications section? -->
+                <div class="notifications flex-wrapper">
+                    <div class="content-circle-wrapper flex-wrapper">
+                        <a href="#">
+                            <i class="fa-solid fa-bell-slash"></i>
+                        </a>
+                    </div>
+                    <div class="notifications-txt-side">
+                        <div>
+                            <span>Receive new messages notifications</span>
+                        </div>
+                        <div>
+                            <a href="#">
+                                <span>Turn on desktop notifications</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ?input side? -->
+                <div class="contact-search flex-wrapper">
+                    <button class="btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <input type="text" placeholder="Find or start a new chat">
+                </div>
+                <!-- ?aside user contacts section? -->
+                <div class="user-contacts">
+                    <!-- ?contacts side? -->
+                    <div class="contacts-list">
+                        <ul>
+                            <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper">
+                                <div class="content-circle-wrapper">
+                                    <img :src="`../img/avatar${element.avatar}.jpg`" alt="">
+                                </div>
+                                <span>{{element.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- ?MAIN? -->
+            <main>
+                <!-- ?first section? -->
+                <section>
+                    <!-- ?main boolzapp top section? -->
+                    <div class="boolzapp-top-portion flex-wrapper">
+                        <!-- ?user profile section? -->
+                        <div class="photo-text-side flex-wrapper">
+                            <div class="content-circle-wrapper">
+                                <img src="../img/avatar_io.jpg" alt="">
+                            </div>
+                            <div class="user-name">
+                                <div>test</div>
+                                <div class="last-seen">Last seen today at...</div>
+                            </div>
+                        </div>
+                        <!-- ?boolzapp top section icons? -->
+                        <ul class="boolzapp-top-portion-icons flex-wrapper">
+                            <li>
+                                <span>
+                                    <a href="#">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </a>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <a href="#">
+                                        <i class="fa-solid fa-paperclip"></i>
+                                    </a>
+                                </span>
+                            </li>
+                            <li>
+                                <span>
+                                    <a href="#">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- ?first section end? -->
+
+                <!-- ?second section? -->
+                <section>
+                    <!-- ?messages wrapper? -->
+                    <div class="messages-wrapper">
+                        <div v-for="element,index in contacts[currentIndex].messages" class="message received">
+                            <p>
+                                {{element.text}}
+                            </p>
+                            <div class="message-date">
+                                <span>{{element.date}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ?second section end? -->
+
+                <!-- ?third section? -->
+                <section>
+                    
+                </section>
+                <!-- ?third section end? -->
+            </main>
+            <!-- ?MAIN END? -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
