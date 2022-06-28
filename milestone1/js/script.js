@@ -99,7 +99,7 @@ var app = new Vue(
         methods: {
             showUserChat(thisIndex) {
                 this.currentIndex = thisIndex;
-            }
+            },
         },
         mounted() {
             

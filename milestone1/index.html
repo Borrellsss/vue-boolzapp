@@ -20,11 +20,15 @@
                     <!-- ?user profile section? -->
                     <div class="photo-text-side flex-wrapper">
                         <div class="content-circle-wrapper">
-                            <img src="../img/avatar_io.jpg" alt="">
+                            <a href="#">
+                                <img src="../img/avatar_io.jpg" alt="">
+                            </a>
                         </div>
                         <div class="user-name">
                             <div>
-                                <div>Francesca</div>
+                                <div>
+                                    <a href="#">Francesca</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,9 +87,11 @@
                     <!-- ?contacts side? -->
                     <div class="contacts-list">
                         <ul>
-                            <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper">
+                            <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper" :class="{'active-chat': currentIndex === index}">
                                 <div class="content-circle-wrapper">
-                                    <img :src="`../img/avatar${element.avatar}.jpg`" alt="">
+                                    <a href="#">
+                                        <img :src="`../img/avatar${element.avatar}.jpg`" alt="">
+                                    </a>
                                 </div>
                                 <span>{{element.name}}</span>
                             </li>
@@ -104,10 +110,14 @@
                         <!-- ?user profile section? -->
                         <div class="photo-text-side flex-wrapper">
                             <div class="content-circle-wrapper">
-                                <img src="../img/avatar_io.jpg" alt="">
+                                <a href="#">
+                                    <img :src="`../img/avatar${contacts[currentIndex].avatar}.jpg`" :alt="contacts[currentIndex].name">
+                                </a>
                             </div>
                             <div class="user-name">
-                                <div>test</div>
+                                <div>
+                                    <a href="#">{{contacts[currentIndex].name}}</a>
+                                </div>
                                 <div class="last-seen">Last seen today at...</div>
                             </div>
                         </div>
@@ -143,7 +153,7 @@
                 <section>
                     <!-- ?messages wrapper? -->
                     <div class="messages-wrapper">
-                        <div v-for="element,index in contacts[currentIndex].messages" class="message received">
+                        <div v-for="(element,index) in contacts[currentIndex].messages" class="message" :class="element.status">
                             <p>
                                 {{element.text}}
                             </p>
@@ -156,8 +166,22 @@
                 <!-- ?second section end? -->
 
                 <!-- ?third section? -->
-                <section>
-                    
+                <section class="flex-wrapper">
+                    <div class="main-bottom-icon">
+                        <span>
+                            <a href="#">
+                                <i class="fa-regular fa-face-smile"></i>
+                            </a>
+                        </span>
+                    </div>
+                    <textarea cols="30" rows="1" placeholder="Write a message"></textarea>
+                    <div class="main-bottom-icon">
+                        <span>
+                            <a href="#">
+                                <i class="fa-solid fa-microphone"></i>
+                            </a>
+                        </span>
+                    </div>
                 </section>
                 <!-- ?third section end? -->
             </main>

@@ -25,9 +25,10 @@
     --main-bottom-side-height: 54px;
     --border-color: #f5f5f5;
     --message-sent: #d5f9ba;
-    --message-received: white;
+    --message-received: #ffffff;
     --messages-padding: 0.8rem;
     --message-date-font-size: 0.5rem;
+    --main-bottom-icon-padding: 1rem 1.5rem;
 }
 
 /* *COMMON* */
@@ -73,6 +74,15 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+/* *hiding scrollbar from textareas* */
+main section:nth-child(3) > textarea::-webkit-scrollbar {
+    display: none;
+}
+main section:nth-child(3) > textarea {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* *boolzapp top portion* */
@@ -123,6 +133,7 @@ aside {
     background-color: white;
 }
 .notifications > .flex-wrapper i {
+    padding: 1rem;
     font-size: 0.8rem;
     color: var(--notification-main-color);
 }
@@ -160,10 +171,11 @@ aside {
     padding: 0 1.4em;
     border-right: none;
 }
+.contact-search .btn i {
+    font-size: 0.8rem;
+}
 .contact-search input,
 .contact-search .btn {
-    padding-top: 0.6em;
-    padding-bottom: 0.6em;
     border-color: var(--border-color);
     background-color: white;
 }
@@ -175,9 +187,13 @@ aside {
 }
 .contacts-list li {
     border-top: 1px solid var(--border-color);
+    cursor: pointer;
 }
 .contacts-list span {
     padding-left: var(--aside-padding);
+}
+.active-chat {
+    background-color: #e9ebea;
 }
 
 /* *MAIN* */
@@ -194,6 +210,7 @@ main {
 
 /* *main second section* */
 main > section:nth-child(2) {
+    padding-top: 2rem;
     height: calc(100% - (var(--boolzapp-top-portion-height) + var(--main-bottom-side-height)));
     background-image: url("../../img/mine.jpg");
     overflow-y: auto;
@@ -231,6 +248,25 @@ main > section:nth-child(2) {
 
 /* *main third section* */
 main section:nth-child(3) {
+    padding: var(--aside-padding) 0;
     height: var(--main-bottom-side-height);
+    align-items: center;
     background-color: #f3eeea;
 }
+main section:nth-child(3) > textarea {
+    padding: 0.6rem 0.5em;
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3rem;
+    resize: none;
+    font-size: 0.7rem;
+    font-family: inherit;
+}
+.main-bottom-icon {
+    padding: var(--main-bottom-icon-padding);
+}
+.main-bottom-icon i {
+    font-size: 1rem;
+    color: gray;
+}
+
