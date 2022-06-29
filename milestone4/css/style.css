@@ -1,0 +1,277 @@
+/* *RESET* */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+}
+
+/* !DEBUG! */
+.message-wrapper {
+    background-color: red;
+}
+
+/* ?VARIABLES? */
+:root {
+    --main-font-size: 0.8rem;
+    --main-icons-font-size: 1rem;
+    --main-font-family: "Segoe UI", Arial, sans-serif;
+    --gray-text: #b1b1b1;
+    --notification-main-color: #8edafb;
+    --aside-padding: 0.5rem;
+    --boolzapp-top-portion-height: 51px;
+    --notifications-side-height: 51px;
+    --aside-input-txt-height: 34px;
+    --main-bottom-side-height: 54px;
+    --border-color: #f5f5f5;
+    --message-sent: #d5f9ba;
+    --message-received: #ffffff;
+    --messages-padding: 0.8rem;
+    --message-date-font-size: 0.5rem;
+    --main-bottom-icon-padding: 1rem 1.5rem;
+}
+
+/* *COMMON* */
+body {
+    font-size: var(--main-font-size);
+    font-family: var(--main-font-family);
+    background-color: #009487;
+}
+#root {
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.main-container {
+    width: 70%;
+    min-width: 950px;
+    height: 95%;
+}
+.flex-wrapper {
+    display: flex;
+}
+img {
+    width: 100%;
+    display: block;
+}
+.content-circle-wrapper {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.btn {
+    border: 1px solid;
+    cursor: pointer;
+}
+i {
+    color: var(--gray-text);
+}
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* *hiding scrollbar from textareas* */
+main section:nth-child(3) > textarea::-webkit-scrollbar {
+    display: none;
+}
+main section:nth-child(3) > textarea {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* *boolzapp top portion* */
+.boolzapp-top-portion {
+    padding: 0.5rem 0.4rem;
+    height: var(--boolzapp-top-portion-height);
+    background-color: #eaeaea;
+    justify-content: space-between;
+}
+main .boolzapp-top-portion {
+    border-left: 1px solid lightgray;
+}
+.boolzapp-top-portion > .photo-text-side.flex-wrapper {
+    align-items: center;
+}
+.boolzapp-top-portion .user-name {
+    padding-left: 0.3rem;
+}
+.boolzapp-top-portion-icons {
+    justify-content: space-between;
+    align-items: center;
+}
+.boolzapp-top-portion-icons i {
+    padding: 0 0.5rem;
+    font-size: var(--main-icons-font-size);
+}
+
+/* *ASIDE* */
+aside {
+    width: 30%;
+    height: 100%;
+    overflow-y: hidden;
+    background-color: white;
+}
+.notifications,
+.contacts-list li {
+    padding: var(--aside-padding);
+}
+
+
+/* *aside notifications section* */
+.notifications {
+    height: var(--notifications-side-height);
+    background-color: var(--notification-main-color);
+}
+.notifications > .flex-wrapper {
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.notifications > .flex-wrapper i {
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: var(--notification-main-color);
+}
+.notifications-txt-side {
+    padding-left: var(--aside-padding);
+}
+.notifications-txt-side > div:first-child {
+    font-size: 0.7rem;
+}
+.notifications-txt-side > div:last-child {
+    font-size: 0.6rem;
+}
+.notifications-txt-side > div:last-child a {
+    color: gray;
+    text-decoration: underline;
+}
+
+/* *input side* */
+.contact-search {
+    padding: 0.3rem;
+    height: var(--aside-input-txt-height);
+    justify-content: center;
+    background-color: #fafafa;
+}
+.contact-search * {
+    font-size: 0.6rem;
+}
+.contact-search input {
+    padding: 0 0.5em;
+    width: 100%;
+    border: 1px solid;
+    border-left: none;
+}
+.contact-search .btn {
+    padding: 0 1.4em;
+    border-right: none;
+}
+.contact-search .btn i {
+    font-size: 0.8rem;
+}
+.contact-search input,
+.contact-search .btn {
+    border-color: var(--border-color);
+    background-color: white;
+}
+
+/* *contacts side* */
+.user-contacts {
+    height: calc(100% - (var(--aside-input-txt-height) + var(--boolzapp-top-portion-height) + var(--notifications-side-height)));
+    overflow-y: auto;
+}
+.contacts-list li {
+    border-top: 1px solid var(--border-color);
+    cursor: pointer;
+}
+.contacts-list span {
+    padding-left: var(--aside-padding);
+}
+.active-chat {
+    background-color: #e9ebea;
+}
+
+/* *MAIN* */
+main {
+    width: 70%;
+    height: 100%;
+}
+
+/* *main first section* */
+.last-seen {
+    font-size: 0.6rem;
+    color: gray;
+}
+
+/* *main second section* */
+main > section:nth-child(2) {
+    padding-top: 2rem;
+    height: calc(100% - (var(--boolzapp-top-portion-height) + var(--main-bottom-side-height)));
+    background-image: url("../../img/mine.jpg");
+    overflow-y: auto;
+}
+.messages-wrapper {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+}
+.message {
+    margin: 0.3rem 0;
+    max-width: 50%;
+    min-width: 40%;
+    display: block;
+    clear: both;
+    border-radius: 0.5rem;
+    overflow-wrap: break-word;
+}
+.message-content {
+    padding: var(--messages-padding) var(--messages-padding) 0;
+}
+.message-date {
+    padding: 0.1rem 0.3rem;
+    text-align: right;
+}
+.message-date > span {
+    font-size: var(--message-date-font-size);
+    color: var(--gray-text);
+}
+.message.sent {
+    background-color: var(--message-sent);
+    float: right;
+}
+.message.received {
+    background-color: var(--message-received);
+    float: left;
+}
+
+/* *main third section* */
+main section:nth-child(3) {
+    padding: var(--aside-padding) 0;
+    height: var(--main-bottom-side-height);
+    align-items: center;
+    background-color: #f3eeea;
+}
+main section:nth-child(3) > textarea {
+    padding: 0.6rem 0.5em;
+    flex-grow: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 0.3rem;
+    resize: none;
+    font-size: 0.7rem;
+    font-family: inherit;
+}
+.main-bottom-icon {
+    padding: var(--main-bottom-icon-padding);
+}
+.main-bottom-icon i {
+    font-size: var(--main-icons-font-size);
+    color: gray;
+}
+
