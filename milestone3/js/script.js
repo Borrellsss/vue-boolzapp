@@ -10,6 +10,7 @@ var app = new Vue(
         el: "#root",
         data: {
             currentIndex: 0,
+            newMessage: "",
             contacts: [
                 {
                     name: 'Michele',
@@ -99,6 +100,47 @@ var app = new Vue(
         methods: {
             showUserChat(thisIndex) {
                 this.currentIndex = thisIndex;
+            },
+            sendNewMessage() {
+                // *standardizzo il messaggio scritto dall'utente nella input*
+                // *eliminando eventuali spazi all' inizio e alla fine della stringa*
+                // *salvata nella variabile "newMessage" e salvo il risultato*
+                // *nella variabile "trimmedMessages"*
+                const trimmedMessages = this.newMessage.trim();
+
+                // *creo due nuovi "object": il primo con proprietà "text": "trimmedMessages"*
+                // *che risulterà come messaggio inviato e quindi con propietà*
+                // *"status": "sent"*
+                const newMessageObject = {
+                    date: "29/06/2022 15:50:00",
+                    text: trimmedMessages,
+                    status: "sent"
+                };
+
+                // *e il secondo con proprietà "text": "ok"*
+                // *che risulterà come messaggio inviato e quindi con propietà*
+                // *"status": "received"*
+                const newReceivedMessage = {
+                    date: "29/06/2022 15:50:00",
+                    text: "ok",
+                    status: "received"
+                };
+
+                // *se "trimmedMessages.length" è maggiore di "0" allora pusho "newMessageObject"*
+                // *nell'array "messages" presente nell'"object" con indice "currentIndex" e*
+                // *dopo un secondo pusho anche "newReceivedMessage" nello stesso array così*
+                // *da simulare una risposta utilizzando un "setTimeout"* 
+                if(trimmedMessages.length > 0) {
+                    this.contacts[this.currentIndex].messages.push(newMessageObject);
+                    setTimeout(() => {
+                        this.contacts[this.currentIndex].messages.push(newReceivedMessage);
+                    }, 1000);
+                }
+
+                // *al termine della funzione riporto il valore di "newMessage"*
+                // *a stringa vuota così da svuotare anche la "textarea" nel "DOM"*
+                // *ad essa collegata tramite "v-model"*
+                this.newMessage = "";
             },
         },
         mounted() {

@@ -21,7 +21,7 @@
                     <div class="photo-text-side flex-wrapper">
                         <div class="content-circle-wrapper">
                             <a href="#">
-                                <img src="../img/avatar_io.jpg" alt="">
+                                <img src="../img/avatar_io.jpg" alt="Francesca">
                             </a>
                         </div>
                         <div class="user-name">
@@ -90,7 +90,7 @@
                             <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper" :class="{'active-chat': currentIndex === index}">
                                 <div class="content-circle-wrapper">
                                     <a href="#">
-                                        <img :src="`../img/avatar${element.avatar}.jpg`" alt="">
+                                        <img :src="`../img/avatar${element.avatar}.jpg`" :alt="element.name">
                                     </a>
                                 </div>
                                 <span>{{element.name}}</span>
@@ -154,9 +154,9 @@
                     <!-- ?messages wrapper? -->
                     <div class="messages-wrapper">
                         <div v-for="(element,index) in contacts[currentIndex].messages" class="message" :class="element.status">
-                            <p>
+                            <div class="message-content">
                                 {{element.text}}
-                            </p>
+                            </div>
                             <div class="message-date">
                                 <span>{{element.date}}</span>
                             </div>
@@ -174,7 +174,7 @@
                             </a>
                         </span>
                     </div>
-                    <textarea cols="30" rows="1" placeholder="Write a message"></textarea>
+                    <textarea cols="30" rows="1" placeholder="Write a message" v-model="newMessage" @keyup.enter="sendNewMessage()"></textarea>
                     <div class="main-bottom-icon">
                         <span>
                             <a href="#">

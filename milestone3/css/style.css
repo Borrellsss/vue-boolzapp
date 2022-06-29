@@ -15,8 +15,9 @@
 /* ?VARIABLES? */
 :root {
     --main-font-size: 0.8rem;
+    --main-icons-font-size: 1rem;
     --main-font-family: "Segoe UI", Arial, sans-serif;
-    --gray-text: #b6b9bc;
+    --gray-text: #b1b1b1;
     --notification-main-color: #8edafb;
     --aside-padding: 0.5rem;
     --boolzapp-top-portion-height: 51px;
@@ -107,6 +108,7 @@ main .boolzapp-top-portion {
 }
 .boolzapp-top-portion-icons i {
     padding: 0 0.5rem;
+    font-size: var(--main-icons-font-size);
 }
 
 /* *ASIDE* */
@@ -222,13 +224,23 @@ main > section:nth-child(2) {
 }
 .message {
     margin: 0.3rem 0;
-    padding: var(--messages-padding) var(--messages-padding) 0.4rem;
     max-width: 50%;
     min-width: 40%;
     display: block;
     clear: both;
     border-radius: 0.5rem;
     overflow-wrap: break-word;
+}
+.message-content {
+    padding: var(--messages-padding) var(--messages-padding) 0;
+}
+.message-date {
+    padding: 0.1rem 0.3rem;
+    text-align: right;
+}
+.message-date > span {
+    font-size: var(--message-date-font-size);
+    color: var(--gray-text);
 }
 .message.sent {
     background-color: var(--message-sent);
@@ -237,13 +249,6 @@ main > section:nth-child(2) {
 .message.received {
     background-color: var(--message-received);
     float: left;
-}
-.message-date {
-    text-align: right;
-}
-.message-date > span {
-    font-size: var(--message-date-font-size);
-    color: var(--gray-text);
 }
 
 /* *main third section* */
@@ -266,7 +271,7 @@ main section:nth-child(3) > textarea {
     padding: var(--main-bottom-icon-padding);
 }
 .main-bottom-icon i {
-    font-size: 1rem;
+    font-size: var(--main-icons-font-size);
     color: gray;
 }
 
