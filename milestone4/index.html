@@ -80,14 +80,14 @@
                     <button class="btn">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <input type="text" placeholder="Find or start a new chat">
+                    <input v-model="filteredContact" @keyup="filterContact()" type="text" placeholder="Find or start a new chat">
                 </div>
                 <!-- ?aside user contacts section? -->
                 <div class="user-contacts">
                     <!-- ?contacts side? -->
                     <div class="contacts-list">
                         <ul>
-                            <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper" :class="{'active-chat': currentIndex === index}">
+                            <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper" :class="{'active-chat': currentIndex === index}" v-show="element.visible">
                                 <div class="content-circle-wrapper">
                                     <a href="#">
                                         <img :src="`../img/avatar${element.avatar}.jpg`" :alt="element.name">
@@ -174,7 +174,7 @@
                             </a>
                         </span>
                     </div>
-                    <textarea cols="30" rows="1" placeholder="Write a message" v-model="newMessage" @keyup.enter="sendNewMessage()"></textarea>
+                    <textarea v-model="newMessage" @keyup.enter="sendNewMessage()" cols="30" rows="1" placeholder="Write a message"></textarea>
                     <div class="main-bottom-icon">
                         <span>
                             <a href="#">

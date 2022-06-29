@@ -9,6 +9,7 @@ var app = new Vue(
         data: {
             currentIndex: 0,
             newMessage: "",
+            filteredContact: "",
             contacts: [
                 {
                     name: 'Michele',
@@ -140,6 +141,26 @@ var app = new Vue(
                 // *ad essa collegata tramite "v-model"*
                 this.newMessage = "";
             },
+            filterContact() {
+                // *inizializzo un ciclo "for" per ottentere il singolo*
+                // *"object" presente nell'array "contacts"*
+                for(let i = 0; i < this.contacts.length; i++) {
+                    const thisObject = this.contacts[i];
+
+                    // *converto sia "filteredContact" che "thisObject.name" in stringhe*
+                    // *".toLowerCase()"*
+                    const lowerFilteredContact = this.filteredContact.toLowerCase();
+                    const lowerContactName = thisObject.name.toLowerCase();
+                    
+                    // *se "lowerContactName" include "lowerFilteredContact"*
+                    // *"thisObject.visible" diventa "true" altrimenti diventa "false"*
+                    if(lowerContactName.includes(lowerFilteredContact)) {
+                        thisObject.visible = true;
+                    } else {
+                        thisObject.visible = false;
+                    }
+                }
+            }
         },
         mounted() {
             
