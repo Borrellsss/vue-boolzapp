@@ -13,6 +13,8 @@ var app = new Vue(
             currentMessageIndex: null,
             newMessage: "",
             filteredContact: "",
+            singleRandomAnswer: "",
+            randomAnswers: ["Ciao come stai?", "Hey!", "Ok!", "Sei uscita ieri sera?", "Ho finalmente preso il PC!", "Sono il risultato del Bonus del Bonus", "Non ho idea di cosa sto scrivendo", "Tutto ciò che scrivi non ha senso, sono una sotto-specie di intelligenza artificiale programmata da un ragazzo che a malapena sa scrivere in Javascript Vanilla, figuriamoci farlo in VueJs.", "Ecco a te un'altra risposta casuale, contento/a Debugger?"],
             contacts: [
                 {
                     name: 'Michele',
@@ -123,13 +125,20 @@ var app = new Vue(
                     status: "sent",
                     info: false
                 };
+                
+                // *scorro l'array "randomAnswers" con un ciclo "for" e assegno a "singleRandomAnswer"*
+                // *un elemento presente in "randomAnswers" con indice casuale ricavato dalla funzione "getRndInteger"*
+                for(let i = 0; i < this.randomAnswers.length; i++) {
+                    const randomIndex = this.getRndInteger(0, this.randomAnswers.length);
+                    singleRandomAnswer = this.randomAnswers[randomIndex];
+                };
 
                 // *e il secondo con proprietà "text": "ok"*
                 // *che risulterà come messaggio inviato e quindi con propietà*
                 // *"status": "received"*
                 const newReceivedMessage = {
                     date: `${currentDate} ${currentHours}`,
-                    text: "ok",
+                    text: singleRandomAnswer,
                     status: "received",
                     info: false
                 };
@@ -188,7 +197,10 @@ var app = new Vue(
                 
                 // *ogni volta che elimino un messaggio riporto "currentMessageIndex" a "null"*
                 this.currentMessageIndex = null;
-            }
+            },
+            getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min) ) + min;
+            },
         },
         mounted() {
             
