@@ -5,12 +5,33 @@
 // messaggio selezionato
 // Visualizzazione ora e ultimo messaggio inviato/ricevuto
 // nella lista dei contatti
+
+// MORE BONUSES:
+// 1- predisporre una lista di frasi e/o citazioni da utilizzare al
+// posto della risposta "ok:" quando il pc risponde, anziché scrivere "ok",
+// scegliere una frase random dalla lista e utilizzarla come
+// testo del messaggio di risposta del pc 
+// 2- dare la possibilità all'utente di cancellare tutti
+// i messaggi di un contatto o di cancellare l'intera chat con tutti i
+// suoi dati: cliccando sull'icona con i tre pallini in alto a destra,
+// si apre un dropdown menu in cui sono presenti le voci
+// "Elimina messaggi" ed "Elimina chat"; cliccando su di essi si
+// cancellano rispettivamente tutti i messaggi di quel contatto
+// (quindi rimane la conversazione vuota) oppure l'intera chat
+// comprensiva di tutti i dati del contatto oltre che tutti i
+// suoi messaggi (quindi sparisce il contatto anche dalla lista di sinistra)
+// 3-cambiare icona in basso a destra (a fianco all'input per scrivere un nuovo messaggio)
+// finché l'utente sta scrivendo: di default si visualizza l'icona del microfono,
+// quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il
+// messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono.
+// inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
 var app = new Vue(
     {
         el: "#root",
         data: {
             currentIndex: 0,
             currentMessageIndex: null,
+            chatInfo: false,
             newMessage: "",
             filteredContact: "",
             singleRandomAnswer: "",
@@ -103,6 +124,9 @@ var app = new Vue(
         },
         methods: {
             showUserChat(thisIndex) {
+                // *ogni volta che cambio chat riporto "chatInfo" a "false"*
+                this.chatInfo = false;
+
                 // *ogni volta che cambio chat riporto "currentMessageIndex" a "null"*
                 this.currentMessageIndex = null;
                 this.currentIndex = thisIndex;
@@ -181,6 +205,10 @@ var app = new Vue(
             },
             showInfo(thisIndex) {
                 // *al click sulla freccia che appare quando si è in ":hover"*
+                // *sul messaggio riporto "chatInfo" a "false"*
+                this.chatInfo = false;
+
+                // *al click sulla freccia che appare quando si è in ":hover"*
                 // *sul messaggio "currentMessageIndex" prende il valore di "thisIndex"*
                 // *solo se "currentMessageIndex" è diverso da "thisIndex" altrimenti riporto*
                 // *"currentMessageIndex" a "null"*
@@ -201,6 +229,33 @@ var app = new Vue(
             getRndInteger(min, max) {
                 return Math.floor(Math.random() * (max - min) ) + min;
             },
+            showChatInfo() {
+                // *ogni volta che clicco sull'elemento del DOM "chat-options" riporto "currentMessageIndex" a "null"*
+                this.currentMessageIndex = null;
+
+                // *al "click" su "chat-options" il valore della variabile "chatInfo"*
+                // *diventa il contrario di se stesso: se è "false" diventa "true" e viceversa*
+                this.chatInfo = !this.chatInfo;
+            },
+            deleteThisChat() {
+                // *se l'"object" che sto eliminando è quello con l'ultimo indice dell'array "contacts"*
+                // *lo elimino e decremento di 1 la variabile "currentIndex" altrimenti lo elimino e basta*
+                if(this.contacts[this.currentIndex] === this.contacts[this.contacts.length - 1]) {
+                    this.contacts.splice(this.currentIndex, 1);
+                    this.currentIndex--;
+                } else {
+                    this.contacts.splice(this.currentIndex, 1);
+                }         
+
+                // *ogni volta che elimino una chat riporto "chatInfo" a "false"*
+                this.chatInfo = false;
+            },
+            deleteAllMessages() {
+                this.contacts[this.currentIndex].messages.splice(0, this.contacts[this.currentIndex].messages.length);
+            
+                // *ogni volta che elimino tutti i messaggi di una chat riporto "chatInfo" a "false"*
+                this.chatInfo = false;
+            }
         },
         mounted() {
             

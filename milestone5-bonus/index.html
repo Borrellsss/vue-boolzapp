@@ -118,12 +118,12 @@
                     <div class="boolzapp-top-portion flex-wrapper">
                         <!-- ?user profile section? -->
                         <div class="photo-text-side flex-wrapper">
-                            <div class="content-circle-wrapper">
+                            <div v-if="contacts.length > 0" class="content-circle-wrapper">
                                 <a href="#">
                                     <img :src="`../img/avatar${contacts[currentIndex].avatar}.jpg`" :alt="contacts[currentIndex].name">
                                 </a>
                             </div>
-                            <div class="user-name">
+                            <div v-if="contacts.length > 0" class="user-name">
                                 <div>
                                     <a href="#">{{contacts[currentIndex].name}}</a>
                                 </div>
@@ -146,12 +146,16 @@
                                     </a>
                                 </span>
                             </li>
-                            <li>
+                            <li class="chat-menu">
                                 <span>
-                                    <a href="#">
+                                    <a @click="showChatInfo()" href="#">
                                         <i class="fa-solid fa-ellipsis-vertical"></i>
                                     </a>
                                 </span>
+                                <div class="chat-options" :class="{'active': chatInfo}">
+                                    <div @click="deleteThisChat()" class="first-option">Delete chat</div>
+                                    <div @click="deleteAllMessages()" class="second-option">Delete all messages</div>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -161,7 +165,7 @@
                 <!-- ?second section? -->
                 <section>
                     <!-- ?messages wrapper? -->
-                    <div class="messages-wrapper">
+                    <div v-if="contacts.length > 0" class="messages-wrapper">
                         <div v-for="(element,index, array) in contacts[currentIndex].messages" class="message" :class="element.status">
                             <div class="message-content">
                                 {{element.text}}
@@ -172,8 +176,8 @@
                                 </span>
 
                                 <div class="message-options" :class="{'active': currentMessageIndex === index}">
-                                    <div class="message-info">Message info</div>
-                                    <div @click="deleteMessage()" class="message-delete">Delete message</div>
+                                    <div class="first-option">Message info</div>
+                                    <div @click="deleteMessage()" class="second-option">Delete message</div>
                                 </div>
                             </div>
                             <div class="message-date">

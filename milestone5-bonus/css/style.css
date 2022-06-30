@@ -103,6 +103,48 @@ main .boolzapp-top-portion {
     font-size: var(--medium-icons-font-size);
 }
 
+/* *hodden menus* */
+.chat-menu {
+    position: relative;
+}
+.chat-options,
+.message-options {
+    background-color: #fff;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px #b1b1b1;
+    position: absolute;
+    display: none;
+}
+.chat-options {
+    z-index: 100;
+    top: 1.5rem;
+    right: 0;
+}
+.message-options {
+    z-index: 99;
+    top: 2rem;
+    right: 0.5rem;
+}
+.chat-options.active,
+.message-options.active {
+    display: block;
+}
+.first-option {
+    padding: 1rem 1.5rem 0.5rem;
+}
+.second-option {
+    padding: 0.5rem 1.5rem 1rem;
+}
+.chat-options .first-option,
+.chat-options .second-option {
+    width: 10.5rem;
+}
+.first-option:hover,
+.second-option:hover {
+    background-color: #e9ebea;
+    cursor: pointer;
+}
+
 /* *icons hover color change* */
 .fa-circle-notch:hover {
     color: #5f0094;
@@ -307,30 +349,6 @@ main > section:nth-child(2) {
 }
 .message.received i {
     background: radial-gradient(circle, rgba(255,255,255,1) 30%, rgba(0,0,0,0) 100%);
-}
-.message-options {
-    background-color: #ffffff;
-    border-radius: 0.25rem;
-    box-shadow: 0 2px 4px #b1b1b1;
-    position: absolute;
-    top: 2rem;
-    right: 0.5rem;
-    z-index: 99;
-    display: none;
-}
-.message-options.active {
-    display: block;
-}
-.message-info {
-    padding: 1rem 1.5rem 0.5rem;
-}
-.message-delete {
-    padding: 0.5rem 1.5rem 1rem;
-}
-.message-info:hover,
-.message-delete:hover {
-    background-color: #e9ebea;
-    cursor: pointer;
 }
 
 /* *main third section* */
