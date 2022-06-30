@@ -14,7 +14,7 @@
     <div id="root" class="flex-wrapper">
         <div class="main-container flex-wrapper">
             <!-- ?ASIDE? -->
-            <aside>
+            <aside class="flex-wrapper">
                 <!-- ?aside boolzapp top section? -->
                 <div class="boolzapp-top-portion flex-wrapper">
                     <!-- ?user profile section? -->
@@ -77,10 +77,10 @@
                 </div>
                 <!-- ?input side? -->
                 <div class="contact-search flex-wrapper">
-                    <button class="btn">
+                    <label for="filtered-name">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    <input v-model="filteredContact" @keyup="filterContact()" type="text" placeholder="Find or start a new chat">
+                    </label>
+                    <input v-model="filteredContact" @keyup="filterContact()" type="text" placeholder="Find or start a new chat" id="filtered-name">
                 </div>
                 <!-- ?aside user contacts section? -->
                 <div class="user-contacts">
@@ -88,12 +88,20 @@
                     <div class="contacts-list">
                         <ul>
                             <li @click="showUserChat(index)" v-for="(element,index) in contacts" class="flex-wrapper" :class="{'active-chat': currentIndex === index}" v-show="element.visible">
-                                <div class="content-circle-wrapper">
-                                    <a href="#">
-                                        <img :src="`../img/avatar${element.avatar}.jpg`" :alt="element.name">
-                                    </a>
+                                <div class="contact-list-l-side flex-wrapper">
+                                    <div class="content-circle-wrapper">
+                                        <a href="#">
+                                            <img :src="`../img/avatar${element.avatar}.jpg`" :alt="element.name">
+                                        </a>
+                                    </div>
+                                    <div class="contact-info">
+                                        <div class="contact-name">{{element.name}}</div>
+                                        <div v-if="element.messages.length > 0" class="last-message">
+                                            {{element.messages[element.messages.length - 1].text.slice(0, 20)}}<span v-if="element.messages[element.messages.length - 1].text.length > 20">...</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span>{{element.name}}</span>
+                                <div v-if="element.messages.length > 0" class="last-message-date">{{element.messages[element.messages.length - 1].date}}</div>
                             </li>
                         </ul>
                     </div>
@@ -102,7 +110,7 @@
             </aside>
 
             <!-- ?MAIN? -->
-            <main>
+            <main class="flex-wrapper">
                 <!-- ?first section? -->
                 <section>
                     <!-- ?main boolzapp top section? -->
@@ -118,7 +126,7 @@
                                 <div>
                                     <a href="#">{{contacts[currentIndex].name}}</a>
                                 </div>
-                                <div class="last-seen">Last seen today at...</div>
+                                <div v-if="contacts[currentIndex].messages.length > 0" class="last-seen">Last seen today at {{contacts[currentIndex].messages[contacts[currentIndex].messages.length -1].date}}</div>
                             </div>
                         </div>
                         <!-- ?boolzapp top section icons? -->
@@ -153,9 +161,19 @@
                 <section>
                     <!-- ?messages wrapper? -->
                     <div class="messages-wrapper">
-                        <div v-for="(element,index) in contacts[currentIndex].messages" class="message" :class="element.status">
+                        <div v-for="(element,index, array) in contacts[currentIndex].messages" class="message" :class="element.status">
                             <div class="message-content">
                                 {{element.text}}
+                                <span class="message-arrow">
+                                    <a @click="showInfo(index)" href="#">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                    </a>
+                                </span>
+
+                                <div class="message-options" :class="{'active': currentMessageIndex === index}">
+                                    <div class="message-info">Message info</div>
+                                    <div @click="deleteMessage()" class="message-delete">Delete message</div>
+                                </div>
                             </div>
                             <div class="message-date">
                                 <span>{{element.date}}</span>

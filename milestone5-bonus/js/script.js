@@ -10,6 +10,7 @@ var app = new Vue(
         el: "#root",
         data: {
             currentIndex: 0,
+            currentMessageIndex: null,
             newMessage: "",
             filteredContact: "",
             contacts: [
@@ -21,7 +22,7 @@ var app = new Vue(
                         {
                             date: '10/01/2020 15:30:55',
                             text: 'Hai portato a spasso il cane?',
-                            status: 'sent'
+                            status: 'sent'              
                         },
                         {
                             date: '10/01/2020 15:50:00',
@@ -100,6 +101,8 @@ var app = new Vue(
         },
         methods: {
             showUserChat(thisIndex) {
+                // *ogni volta che cambio chat riporto "currentMessageIndex" a "null"*
+                this.currentMessageIndex = null;
                 this.currentIndex = thisIndex;
             },
             sendNewMessage() {
@@ -109,22 +112,26 @@ var app = new Vue(
                 // *nella variabile "trimmedMessages"*
                 const trimmedMessages = this.newMessage.trim();
 
+                const currentDate = new Date().toLocaleDateString('en-US');
+                const currentHours = new Date().toLocaleTimeString('en-US');
                 // *creo due nuovi "object": il primo con proprietà "text": "trimmedMessages"*
                 // *che risulterà come messaggio inviato e quindi con propietà*
                 // *"status": "sent"*
                 const newMessageObject = {
-                    date: "29/06/2022 15:50:00",
+                    date: `${currentDate} ${currentHours}`,
                     text: trimmedMessages,
-                    status: "sent"
+                    status: "sent",
+                    info: false
                 };
 
                 // *e il secondo con proprietà "text": "ok"*
                 // *che risulterà come messaggio inviato e quindi con propietà*
                 // *"status": "received"*
                 const newReceivedMessage = {
-                    date: "29/06/2022 15:50:00",
+                    date: `${currentDate} ${currentHours}`,
                     text: "ok",
-                    status: "received"
+                    status: "received",
+                    info: false
                 };
 
                 // *se "trimmedMessages.length" è maggiore di "0" allora pusho "newMessageObject"*
@@ -162,6 +169,25 @@ var app = new Vue(
                         thisObject.visible = false;
                     }
                 }
+            },
+            showInfo(thisIndex) {
+                // *al click sulla freccia che appare quando si è in ":hover"*
+                // *sul messaggio "currentMessageIndex" prende il valore di "thisIndex"*
+                // *solo se "currentMessageIndex" è diverso da "thisIndex" altrimenti riporto*
+                // *"currentMessageIndex" a "null"*
+                if(this.currentMessageIndex !== thisIndex) {
+                    this.currentMessageIndex = thisIndex;
+                } else {
+                    this.currentMessageIndex = null;
+                }
+            },
+            deleteMessage() {
+                // *al click su "delete message" elimino l'"object" dell'array*
+                // *"messages" con indice corrispondente*
+                this.contacts[this.currentIndex].messages.splice(this.currentMessageIndex, 1);
+                
+                // *ogni volta che elimino un messaggio riporto "currentMessageIndex" a "null"*
+                this.currentMessageIndex = null;
             }
         },
         mounted() {
