@@ -25,10 +25,15 @@
 // quando l'input non è vuoto si visualizza l'icona dell'aeroplano. Quando il
 // messaggio è stato inviato e l'input si svuota, si torna a visualizzare il microfono.
 // inviare quindi il messaggio anche cliccando sull'icona dell'aeroplano
+// 4-aggiungere le emoticons, tramite l'utilizzo di una libreria
+
+// *aggiungo la possibilità di utilizzare le emoji*
+Vue.use(EmojiPicker);
 var app = new Vue(
     {
         el: "#root",
         data: {
+            search: '',
             currentIndex: 0,
             currentMessageIndex: null,
             chatInfo: false,
@@ -132,6 +137,11 @@ var app = new Vue(
                 this.currentIndex = thisIndex;
             },
             sendNewMessage() {
+                // *ogni volta che ivio un messaggio riporto "chatInfo" a "false"*
+                // *e "currentMessageIndex" a "null"*
+                this.chatInfo = false;
+                this.currentMessageIndex = null;
+
                 // *standardizzo il messaggio scritto dall'utente nella input*
                 // *eliminando eventuali spazi all' inizio e alla fine della stringa*
                 // *salvata nella variabile "newMessage" e salvo il risultato*
@@ -255,7 +265,21 @@ var app = new Vue(
             
                 // *ogni volta che elimino tutti i messaggi di una chat riporto "chatInfo" a "false"*
                 this.chatInfo = false;
+            },
+            coloseAllMenus() {
+                // *ogni volta che apro il menu delle emoji riporto "chatInfo"*
+                // *a "false" e "currentMessageIndex" a "null"*
+                this.chatInfo = false;
+                this.currentMessageIndex = null;
+            },
+            append(emoji) {
+                this.newMessage += emoji
             }
+        },
+        directives: {
+            inserted(el) {
+                el.focus()
+            },
         },
         mounted() {
             

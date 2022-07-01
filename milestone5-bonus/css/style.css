@@ -19,6 +19,7 @@
     --border-color: #f5f5f5;
     --message-sent: #d5f9ba;
     --message-received: #ffffff;
+    --box-shadow: 0 2px 4px #b1b1b1;
     --messages-padding: 0.8rem;
     --message-date-font-size: 0.5rem;
     --main-bottom-icon-padding: 1rem 1.5rem;
@@ -69,6 +70,15 @@ a {
     text-decoration: none;
     color: inherit;
 }
+textarea,
+input {
+    font-family: inherit;
+    font-weight: inherit;
+}
+textarea:focus,
+input:focus {
+    outline: none;
+}
 
 /* *hiding scrollbar from textareas* */
 main section:nth-child(3) > textarea::-webkit-scrollbar {
@@ -77,6 +87,18 @@ main section:nth-child(3) > textarea::-webkit-scrollbar {
 main section:nth-child(3) > textarea {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+/* *changing placeholder's color* */
+::placeholder {
+    color: var(--gray-text);
+    opacity: 1;
+} 
+:-ms-input-placeholder {
+    color: var(--gray-text);;
+}
+::-ms-input-placeholder {
+    color: var(--gray-text);
 }
 
 /* *boolzapp top portion* */
@@ -111,7 +133,7 @@ main .boolzapp-top-portion {
 .message-options {
     background-color: #fff;
     border-radius: 0.25rem;
-    box-shadow: 0 2px 4px #b1b1b1;
+    box-shadow: var(--box-shadow);
     position: absolute;
     display: none;
 }
@@ -146,26 +168,24 @@ main .boolzapp-top-portion {
 }
 
 /* *icons hover color change* */
-.fa-circle-notch:hover {
+a:hover > .fa-circle-notch {
     color: #5f0094;
 }
-.fa-message:hover {
+a:hover > .fa-message {
     color: #009487;
 }
-.fa-ellipsis-vertical:hover,
-.fa-magnifying-glass:hover {
+a:hover > .fa-ellipsis-vertical,
+a:hover > .fa-magnifying-glass,
+a:hover > .fa-camera {
     color: #000;
 }
-.fa-paperclip:hover {
+a:hover > .fa-paperclip {
     color: #8edafb;
 }
-.fa-face-smile:hover {
-    color: #fdd335;
-}
-.fa-microphone:hover {
+a:hover > .fa-microphone {
     color: #f00;
 }
-.fa-paper-plane:hover {
+a:hover > .fa-paper-plane {
     color: #8edafb;
 }
 
@@ -310,7 +330,7 @@ main > section:nth-child(2) {
     border-radius: 0.5rem;
     overflow-wrap: break-word;
     position: relative;
-    box-shadow: 0 2px 4px #b1b1b1;
+    box-shadow: var(--box-shadow);
 }
 .message-arrow {
     position: absolute;
@@ -353,22 +373,98 @@ main > section:nth-child(2) {
 
 /* *main third section* */
 main section:nth-child(3) {
+    padding: 0.35rem 0;
     align-items: center;
     background-color: #f3eeea;
 }
-main section:nth-child(3) > textarea {
-    padding: 0.6rem 0.5em;
-    flex-grow: 1;
+.regular-input {
+    padding: 0.6rem 2.3rem 0.6rem 1rem;
+    width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 0.2rem;
     resize: none;
-    font-size: 0.7rem;
-    font-family: inherit;
+    font-size: 0.8rem;
 }
-.main-bottom-icon {
-    padding: var(--main-bottom-icon-padding);
+.main-bottom-icon a {
+    margin: 0 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
 }
 .main-bottom-icon i {
     font-size: var(--main-icons-font-size);
     color: gray;
+}
+
+/* *EMOJI* */
+.input-emoji-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+.emoji-invoker {
+    position: absolute;
+    top: 0.35rem;
+    right: 0.6rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+.emoji-invoker:hover {
+    transform: scale(1.05);
+}
+.emoji-invoker > svg {
+    fill: var(--gray-text);
+}
+.emoji-invoker:hover > svg {
+    fill: #fdd335;
+}
+.emoji-picker {
+    padding: 0.7rem;
+    width: 15rem;
+    height: 10rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    background: rgba(255,255,255,.95);
+    box-shadow: var(--box-shadow);
+    overflow: auto;
+    position: absolute;
+    right: 1.2rem;
+    bottom: 100%;
+    z-index: 101;
+}
+.emoji-picker__search > input {
+    padding: 0.5rem 0.75rem;
+    flex: 1;
+    border-radius: 0.2rem;
+    border: 1px solid lightgray;
+}
+.emoji-picker h5 {
+    padding: 0.3rem 0;
+    font-size: 0.7rem;
+    color: #b1b1b1;
+    text-transform: uppercase;
+    cursor: default;
+}
+.emoji-picker .emojis {
+    font-size: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.emoji-picker .emojis:after {
+    content: "";
+    flex: auto;
+}
+.emoji-picker .emojis span {
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.emoji-picker .emojis span:hover {
+    background: #ececec;
+    cursor: pointer;
 }
