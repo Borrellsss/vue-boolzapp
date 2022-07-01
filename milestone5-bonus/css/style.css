@@ -406,7 +406,7 @@ main section:nth-child(3) {
 }
 .emoji-invoker {
     position: absolute;
-    top: 0.35rem;
+    top: 0.45rem;
     right: 0.6rem;
     width: 1.5rem;
     height: 1.5rem;
