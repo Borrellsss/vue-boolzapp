@@ -106,9 +106,9 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
             </aside>
+            <!-- ?ASIDE END? -->
 
             <!-- ?MAIN? -->
             <main class="flex-wrapper">
@@ -122,6 +122,13 @@
                                 <a href="#">
                                     <img :src="`../img/avatar${contacts[currentIndex].avatar}.jpg`" :alt="contacts[currentIndex].name">
                                 </a>
+                            </div>
+                            <div v-else>
+                                <div class="content-circle-wrapper">
+                                    <a href="#" class="empty-circle">
+                                        EB
+                                    </a>
+                                </div>
                             </div>
                             <div v-if="contacts.length > 0" class="user-name">
                                 <div>
@@ -174,7 +181,6 @@
                                         <i class="fa-solid fa-chevron-down"></i>
                                     </a>
                                 </span>
-
                                 <div class="message-options" :class="{'active': currentMessageIndex === index}">
                                     <div class="first-option">Message info</div>
                                     <div @click="deleteMessage()" class="second-option">Delete message</div>

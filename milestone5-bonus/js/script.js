@@ -43,7 +43,7 @@ var app = new Vue(
             randomAnswers: ["Ciao come stai?", "Hey!", "Ok!", "Sei uscita ieri sera?", "Ho finalmente preso il PC!", "Sono il risultato del Bonus del Bonus", "Non ho idea di cosa sto scrivendo", "Tutto ciò che scrivi non ha senso, sono una sotto-specie di intelligenza artificiale programmata da un ragazzo che a malapena sa scrivere in Javascript Vanilla, figuriamoci farlo in VueJs.", "Ecco a te un'altra risposta casuale, contento/a Debugger?"],
             contacts: [
                 {
-                    name: 'Michele',
+                    name: 'Edoardo',
                     avatar: '_1',
                     visible: true,
                     messages: [
@@ -87,7 +87,7 @@ var app = new Vue(
                     ],
                 },
                 {
-                    name: 'Samuele',
+                    name: 'Michele',
                     avatar: '_3',
                     visible: true,
                     messages: [
@@ -121,6 +121,23 @@ var app = new Vue(
                         {
                             date: '10/01/2020 15:50:00',
                             text: 'Si, ma preferirei andare al cinema',
+                            status: 'received'
+                        }
+                    ],
+                },
+                {
+                    name: 'Stella',
+                    avatar: '_io',
+                    visible: true,
+                    messages: [
+                        {
+                            date: '01/07/2022 15:30:55',
+                            text: 'Oggi è il mio ultimo giorno a Valencia...',
+                            status: 'sent'
+                        },
+                        {
+                            date: '01/07/2022 16:30:50',
+                            text: 'Ah... Mi dispiace molto :(',
                             status: 'received'
                         }
                     ],

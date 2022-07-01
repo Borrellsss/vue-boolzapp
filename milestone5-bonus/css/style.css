@@ -55,6 +55,10 @@ img {
     height: 35px;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgray;
 }
 .boolzapp-top-portion .content-circle-wrapper {
     width: 30px;
@@ -124,6 +128,9 @@ main .boolzapp-top-portion {
     padding: 0 0.5rem;
     font-size: var(--medium-icons-font-size);
 }
+.empty-circle {
+    padding: 1rem;
+}
 
 /* *hodden menus* */
 .chat-menu {
@@ -186,9 +193,8 @@ a:hover > .fa-microphone {
     color: #f00;
 }
 a:hover > .fa-paper-plane {
-    color: #8edafb;
+    color: #29b6f6;
 }
-
 
 /* *ASIDE* */
 aside {
@@ -418,7 +424,7 @@ main section:nth-child(3) {
     transform: scale(1.05);
 }
 .emoji-invoker > svg {
-    fill: var(--gray-text);
+    fill: lightgray;
 }
 .emoji-invoker:hover > svg {
     fill: #fdd335;
